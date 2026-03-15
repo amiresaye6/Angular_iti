@@ -1,0 +1,12 @@
+@if(course)
+{
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+    <img [src]="course.image" class="w-full rounded-lg mb-4">
+    <h2 class="text-3xl font-bold text-indigo-700">{{course.title}}</h2>
+    <p class="text-slate-600 my-2">Instructor: <b>{{course.instructor}}</b></p>
+    <div class="flex justify-between items-center mt-4">
+        <span class="text-xl font-bold text-emerald-600">{{course.price | currency}}</span>
+        <button routerLink="/courses" class="text-indigo-600 underline">Back to List</button>
+    </div>
+</div>
+}
