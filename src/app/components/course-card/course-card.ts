@@ -8,13 +8,18 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-course-card',
   imports: [CommonModule, DiscountPipe, AppDisableAfterClick, RouterLink],
-  templateUrl: './course-card.html'
+  templateUrl: './course-card.html',
 })
 export class CourseCard {
   @Input({ required: true }) course!: ICourse;
-  @Output() onBook = new EventEmitter<number>();
+  @Output() onBook = new EventEmitter<string>();
+  @Output() onDelete = new EventEmitter<string>();
 
   handleBook() {
     this.onBook.emit(this.course.id);
+  }
+
+  handleDelete() {
+    this.onDelete.emit(this.course.id);
   }
 }

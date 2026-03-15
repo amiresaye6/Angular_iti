@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { Courses } from './components/courses/courses';
 import { CourseDetails } from './components/course-details/course-details';
+import { CourseFormComponent } from './components/course-form/course-form';
 import { Component } from '@angular/core';
 
-// Inline simple components for static pages
 @Component({ selector: 'app-home', template: '<h1 class="p-6 text-2xl">Welcome Home!</h1>' })
 export class HomeComponent {}
 
@@ -26,5 +26,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'courses', component: Courses },
   { path: 'course/:id', component: CourseDetails },
+  { path: 'insertcourse', component: CourseFormComponent },
+  { path: 'editcourse/:id', component: CourseFormComponent },
   { path: '**', component: NotFoundComponent },
 ];

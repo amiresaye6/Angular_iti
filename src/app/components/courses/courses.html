@@ -1,18 +1,24 @@
-<header class="w-full p-4 shadow-sm flex justify-between items-center px-4">
+<header class="w-full p-4 shadow-sm flex flex-col sm:flex-row justify-between items-center px-4 gap-4">
     <div class="logo flex justify-center items-center gap-2">
         <img src="./icons/school.png" alt="school logo" class="w-8">
         <h1 class="text-indigo-600 font-bold text-3xl">My Courses</h1>
     </div>
 
-    <div class="flex">
-        <div class="flex items-center gap-1 justify-center border-x px-8 border-slate-100">
+    <div class="flex items-center gap-4">
+        <button routerLink="/insertcourse"
+            class="bg-indigo-600 text-white px-4 py-2 font-bold rounded-lg hover:bg-indigo-700 shadow-md">
+            + Add Course
+        </button>
+
+        <div class="flex items-center gap-1 justify-center border-x px-4 border-slate-100">
             <span class="text-slate-400 text-[10px] uppercase tracking-widest font-bold">Total Booked</span>
             <h2 class="text-xl font-black text-indigo-600">${{ totalValue }}</h2>
         </div>
         <select (change)="filterByCategory($event)" name="categories" id="categories"
-            class="py-1 px-2 rounded-lg border-2 shadow-sm border-indigo-600 ">
-            @for(category of categories; track category) {
-            <option [value]="category">{{category | titlecase}}</option>
+            class="py-1 px-2 rounded-lg border-2 shadow-sm border-indigo-600 outline-none">
+            <option value="all">All Categories</option>
+            @for(cat of categories; track cat.id) {
+            <option [value]="cat.id">{{cat.name | titlecase}}</option>
             }
         </select>
     </div>
@@ -21,7 +27,7 @@
 <main class="p-6">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @for(course of filteredCourses; track course.id) {
-        <app-course-card [course]="course" (onBook)="bookSeat($event)">
+        <app-course-card [course]="course" (onBook)="bookSeat($event)" (onDelete)="removeCourse($event)">
         </app-course-card>
         }
     </div>

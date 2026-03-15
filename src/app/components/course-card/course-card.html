@@ -1,38 +1,45 @@
-<div class="card relative p-4 m-4 rounded-2xl shadow-sm border-slate-200">
+<div class="card relative p-4 m-4 rounded-2xl shadow-sm border border-slate-200">
     <div class="img">
-        <img class="object-fill rounded-lg" [src]="course.image" alt="">
+        <img class="object-fill w-full h-48 rounded-lg" [src]="course.image" alt="course image">
     </div>
     <span class="absolute px-2 py-0.5 m-2 rounded-lg top-0 right-0 bg-slate-900/60 text-white font-bold text-[10px]">
         {{course.price | discount}} $
     </span>
-    <h1 class="title text-slate-900">{{course.title}}</h1>
-    <div class="flex gap-2 items-center">
-        <img src="./icons/school.png" class="w-5" alt="school">
-        <h1 class="instructor text-indigo-600">{{course.instructor}}</h1>
+
+    <div class="absolute top-2 left-2 flex gap-1">
+        <button [routerLink]="['/editcourse', course.id]"
+            class="bg-blue-500 hover:bg-blue-600 text-white p-1 rounded-md text-xs shadow">Edit</button>
+        <button (click)="handleDelete()"
+            class="bg-red-500 hover:bg-red-600 text-white p-1 rounded-md text-xs shadow">Delete</button>
     </div>
-    <div class="flex justify-between items-center">
+
+    <h1 class="title text-slate-900 mt-2 font-bold">{{course.title}}</h1>
+    <div class="flex gap-2 items-center my-1">
+        <img src="./icons/school.png" class="w-5" alt="school">
+        <h1 class="instructor text-indigo-600 text-sm">{{course.instructor}}</h1>
+    </div>
+    <div class="flex justify-between items-center mt-2">
         <div class="flex gap-2 items-center">
             <img src="./icons/office-chair.png" class="w-5" alt="seat">
-            <h1 class="font-bold" [class]="course.seats === 0 ? 'text-red-400' : course.seats <= 2 ? 'text-yellow-400' : 'text-emerald-500'">
+            <h1 class="font-bold text-sm"
+                [class]="course.seats === 0 ? 'text-red-400' : course.seats <= 2 ? 'text-yellow-400' : 'text-emerald-500'">
                 {{course.seats}}
             </h1>
         </div>
-        @if(course.seats <= 2 && course.seats != 0) {
-            <h1 class="py-1 px-2 rounded-lg bg-yellow-400 text-white">Almost full</h1>
-        }
-        @if(course.seats === 0) {
-            <h1 class="py-1 px-2 rounded-lg bg-red-400 text-white">Fully Booked</h1>
-        }
-        <button
-            appDisableAfterClick 
-            (click)="handleBook()" 
-            [class]="'booked' in course ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-indigo-600 hover:bg-indigo-700 text-white'"
-            class="py-1 px-2 rounded-lg">
-            {{ 'booked' in course ? "Booked" : "Book now" }}
-        </button>
+        @if(course.seats <= 2 && course.seats !=0) { <h1
+            class="py-1 px-2 text-[10px] rounded-lg bg-yellow-400 text-white font-bold">Almost full</h1>
+            }
+            @if(course.seats === 0) {
+            <h1 class="py-1 px-2 text-[10px] rounded-lg bg-red-400 text-white font-bold">Fully Booked</h1>
+            }
+            <button appDisableAfterClick (click)="handleBook()"
+                [class]="course.booked ? 'bg-emerald-100 text-emerald-700 hover:bg-emerald-200' : 'bg-indigo-600 hover:bg-indigo-700 text-white'"
+                class="py-1 px-3 text-sm font-bold rounded-lg transition-colors">
+                {{ course.booked ? "Booked" : "Book now" }}
+            </button>
     </div>
-    <button [routerLink]="['/course', course.id]" 
-          class="flex-1 w-full mt-2 text-center py-2 px-3 text-sm font-semibold text-slate-600 bg-slate-100 rounded-xl hover:bg-slate-200 transition-colors">
-    Details
-  </button>
+    <button [routerLink]="['/course', course.id]"
+        class="flex-1 w-full mt-3 text-center py-2 px-3 text-sm font-semibold text-slate-600 bg-slate-100 rounded-xl hover:bg-slate-200 transition-colors">
+        Details
+    </button>
 </div>
